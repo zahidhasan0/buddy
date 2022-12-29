@@ -1,20 +1,10 @@
 import React from "react";
 import { FaComment, FaEdit, FaHeart, FaShare } from "react-icons/fa";
 import { useLoaderData } from "react-router-dom";
+import EditModal from "./EditModal/EditModal";
 
 const SinglePost = () => {
   const singlePost = useLoaderData();
-  console.log(singlePost);
-
-  const handleEdit = () => {
-    fetch(`http://localhost:5000/posts/${singlePost?._id}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({ text: singlePost?.text, image: singlePost.image }),
-    });
-  };
 
   return (
     <div className="card mt-5 border bg-white shadow-md p-3">
@@ -31,8 +21,10 @@ const SinglePost = () => {
           </div>
         </div>
         <div className="my-3 mr-4">
-          <span onClick={handleEdit} className="">
-            <FaEdit />
+          <span className="">
+            <label htmlFor="edit-modal" className="btn">
+              <FaEdit />
+            </label>
           </span>
         </div>
       </div>
@@ -61,6 +53,7 @@ const SinglePost = () => {
           <span></span>
         </p>
       </div>
+      <EditModal singlePost={singlePost}></EditModal>
     </div>
   );
 };
