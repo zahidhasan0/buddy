@@ -1,12 +1,17 @@
 import { format } from "date-fns";
-import React from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
+import { AuthProvider } from "../../../Context/AuthContext";
 
 const CreatePost = () => {
-  const { register, handleSubmit, reset, errors } = useForm();
+  const { register, handleSubmit, reset } = useForm();
+  const [loading, setLoading] = useState(false);
+
+  const { user } = useContext(AuthProvider);
+  console.log(user);
 
   const date = new Date();
-  const postDate = format(date, "Pp");
+  const postDate = format(date, "PPp");
 
   const imgApi = process.env.REACT_APP_imgbb;
 
@@ -15,6 +20,7 @@ const CreatePost = () => {
     const formData = new FormData();
     formData.append("image", image);
     const imgUrl = `https://api.imgbb.com/1/upload?expiration=600&key=${imgApi}`;
+    setLoading(true);
     fetch(imgUrl, {
       method: "POST",
       body: formData,
@@ -28,6 +34,9 @@ const CreatePost = () => {
             text: data.text,
             image: imgData.data.url,
             postTime: postDate,
+            react: 0,
+            userProfilePic: user?.photoURL,
+            userName: user?.displayName,
           };
 
           fetch("http://localhost:5000/posts", {
@@ -43,15 +52,16 @@ const CreatePost = () => {
                 console.log(data);
                 alert("post created successfully");
                 reset();
+                setLoading(false);
               }
-              console.log(data);
             });
         }
       });
   };
 
   return (
-    <div className="mt-5 ">
+    <div className="mt-5 bg-white ">
+      {loading && <p>Please wait...</p>}
       <div className="shadow-lg mx-3 rounded-sm   p-10  ">
         <form onSubmit={handleSubmit(onSubmit)}>
           <p className="text-Black">What's on your mind?</p>

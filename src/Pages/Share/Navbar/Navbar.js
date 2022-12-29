@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { AuthProvider } from "../../../Context/AuthContext";
 
@@ -26,18 +27,23 @@ const Navbar = () => {
         <li>About</li>
       </Link>
       {user?.uid ? (
-        <p className="cursor-pointer" onClick={handleSignout}>
+        <p
+          className="cursor-pointer mr-5 font-semibold"
+          onClick={handleSignout}
+        >
           LogOut
         </p>
       ) : (
-        <Link to="/login">Login</Link>
+        <Link className="mr-5 font-semibold" to="/login">
+          Login
+        </Link>
       )}
       <li>{user?.email}</li>
     </>
   );
 
   return (
-    <div className="navbar bg-teal-600 text-white">
+    <div className="navbar bg-white text-black">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -68,7 +74,11 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{menu}</ul>
       </div>
-      <div className="navbar-end mr-5"></div>
+      <div className="navbar-end mr-5 ">
+        <button htmlFor="search" type="submit">
+          <FaSearch />
+        </button>
+      </div>
     </div>
   );
 };
