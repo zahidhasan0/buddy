@@ -38,6 +38,29 @@ const Login = () => {
         const user = result.user;
         console.log(user);
         navigate("/");
+
+        const userDetails = {
+          email: user?.email,
+          name: user?.displayName,
+          profilePic: user?.photoURL,
+          address: "",
+          university: "",
+        };
+
+        fetch("http://localhost:5000/users", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(userDetails),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.acknowledged) {
+              console.log(data);
+              alert("user created Successfully");
+            }
+          });
       })
       .catch((error) => {
         setError(error);

@@ -3,7 +3,7 @@ import React from "react";
 import PostCard from "../../Share/PostCard/PostCard";
 
 const HomePosts = () => {
-  const { data: posts, isLoading } = useQuery({
+  const { data: posts } = useQuery({
     queryKey: ["posts"],
     queryFn: async () => {
       const res = await fetch("http://localhost:5000/homePosts");

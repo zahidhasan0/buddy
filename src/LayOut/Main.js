@@ -1,6 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import LeftNav from "../Pages/LeftNav/LeftNav";
+import RightNav from "../Pages/RightNav/RightNav";
 import Footer from "../Pages/Share/Footer/Footer";
 import Navbar from "../Pages/Share/Navbar/Navbar";
 
@@ -19,7 +20,7 @@ const Main = () => {
           <Outlet />
         </div>
         <div className=" hidden rounded-xl bg-white mt-5 mx-5 pl-4 py-4  md:block w-[600px]  ">
-          <p>Hey Buddy</p>
+          <RightNav />
         </div>
       </div>
       <Footer />

@@ -6,7 +6,7 @@ import { AuthProvider } from "../../Context/AuthContext";
 const Register = () => {
   const [error, setError] = useState("");
 
-  const { signUp, updateUser } = useContext(AuthProvider);
+  const { signUp, updateUser, googleSignIn } = useContext(AuthProvider);
 
   const {
     register,
@@ -45,6 +45,7 @@ const Register = () => {
             const user = result.user;
             console.log(user);
 
+            // sendUserDb(buddyUser);
             fetch("http://localhost:5000/users", {
               method: "POST",
               headers: {
@@ -69,6 +70,65 @@ const Register = () => {
             setError(error.message);
             console.error(error);
           });
+      });
+  };
+
+  // const sendUserDb = (buddyUser) => {
+  //   fetch("http://localhost:5000/users", {
+  //     method: "POST",
+  //     headers: {
+  //       "content-type": "application/json",
+  //     },
+  //     body: JSON.stringify(buddyUser),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       if (data.acknowledged) {
+  //         alert("User created successfully");
+  //         navigate("/");
+  //         updateUser({
+  //           displayName: buddyUser.name,
+  //           photoURL: buddyUser.profilePic,
+  //         });
+  //       }
+  //       console.log(data);
+  //     });
+  // };
+
+  const handleGoogleLogin = () => {
+    googleSignIn()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+
+        const userDetails = {
+          email: user?.email,
+          name: user?.displayName,
+          profilePic: user?.photoURL,
+          address: "",
+          university: "",
+        };
+
+        navigate("/");
+
+        fetch("http://localhost:5000/users", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(userDetails),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.acknowledged) {
+              console.log(data);
+              alert("user created Successfully");
+            }
+          });
+      })
+      .catch((error) => {
+        setError(error);
+        console.error(error);
       });
   };
 
@@ -190,7 +250,10 @@ const Register = () => {
             Login
           </Link>
         </p>
-        <button className="btn bg-teal-600 text-white w-full my-2">
+        <button
+          onClick={handleGoogleLogin}
+          className="btn bg-teal-600 text-white w-full my-2"
+        >
           Google Sign In
         </button>
       </div>
