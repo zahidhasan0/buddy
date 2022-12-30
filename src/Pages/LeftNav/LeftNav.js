@@ -41,7 +41,7 @@ const LeftNav = () => {
   ];
 
   return (
-    <div>
+    <div className="sticky top-[100px] left-0 ">
       {items.map((item) => (
         <NavCard key={item.id} item={item}></NavCard>
       ))}

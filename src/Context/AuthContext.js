@@ -20,6 +20,7 @@ const googleProvider = new GoogleAuthProvider();
 const AuthContext = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [isDark, setIsDark] = useState(false);
 
   const signUp = (email, password) => {
     setLoading(true);
@@ -60,6 +61,8 @@ const AuthContext = ({ children }) => {
     loading,
     googleSignIn,
     updateUser,
+    isDark,
+    setIsDark,
   };
   return (
     <div>

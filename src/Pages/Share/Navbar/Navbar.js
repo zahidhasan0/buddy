@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { FaSearch } from "react-icons/fa";
+import { FaMoon, FaSearch, FaSun, FaToggleOn } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { AuthProvider } from "../../../Context/AuthContext";
 
@@ -38,12 +38,11 @@ const Navbar = () => {
           Login
         </Link>
       )}
-      <li>{user?.email}</li>
     </>
   );
 
   return (
-    <div className="navbar bg-white text-black">
+    <div className="navbar sticky top-0 left-0 right-0 z-20 bg-white text-black">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -78,6 +77,14 @@ const Navbar = () => {
         <button htmlFor="search" type="submit">
           <FaSearch />
         </button>
+
+        {user?.uid && (
+          <img
+            className="w-10 h-10 ml-4 rounded-full"
+            src={user?.photoURL}
+            alt=""
+          />
+        )}
       </div>
     </div>
   );

@@ -30,7 +30,7 @@ const RightNav = () => {
   ];
 
   return (
-    <div>
+    <div className="sticky top-[100px] left-0 ">
       <h4 className="text-2xl font-semibold mb-3">Recommanded for you</h4>
       <div>
         {items.map((item) => (
