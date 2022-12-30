@@ -1,10 +1,22 @@
 import React from "react";
-import { FaComment, FaEdit, FaHeart, FaShare } from "react-icons/fa";
+import { FaComment, FaHeart, FaShare, FaTrashAlt } from "react-icons/fa";
 import { useLoaderData } from "react-router-dom";
-import EditModal from "./EditModal/EditModal";
 
 const SinglePost = () => {
   const singlePost = useLoaderData();
+
+  console.log(singlePost);
+
+  const handleDelete = () => {
+    const agree = window.confirm("Are you sure to delete this post?");
+    if (agree) {
+      fetch(`http://localhost:5000/posts/${singlePost?._id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => console.log(data));
+    }
+  };
 
   return (
     <div className="card mt-5 border bg-white shadow-md p-3">
@@ -20,11 +32,15 @@ const SinglePost = () => {
             <p>{singlePost.postTime}</p>
           </div>
         </div>
-        <div className="my-3 mr-4">
-          <span className="">
-            <label htmlFor="edit-modal" className="btn">
-              <FaEdit />
-            </label>
+        <div className="flex gap-4 my-3 mr-4">
+          <span className=""></span>
+          <span>
+            <button
+              onClick={handleDelete}
+              className="btn bg-white text-red-600 hover:bg-red-600 hover:text-white"
+            >
+              <FaTrashAlt />
+            </button>
           </span>
         </div>
       </div>
@@ -53,7 +69,6 @@ const SinglePost = () => {
           <span></span>
         </p>
       </div>
-      <EditModal singlePost={singlePost}></EditModal>
     </div>
   );
 };
