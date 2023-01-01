@@ -10,7 +10,7 @@ const About = () => {
   const [singleUser, setSingleUser] = useState({});
 
   useEffect(() => {
-    fetch(`http://localhost:5000/users?email=${user?.email}`)
+    fetch(`https://buddy-server.vercel.app/users?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => setSingleUser(data))
       .catch((error) => console.log(error));

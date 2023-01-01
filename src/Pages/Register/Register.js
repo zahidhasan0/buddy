@@ -46,7 +46,7 @@ const Register = () => {
             console.log(user);
 
             // sendUserDb(buddyUser);
-            fetch("http://localhost:5000/users", {
+            fetch("https://buddy-server.vercel.app/users", {
               method: "POST",
               headers: {
                 "content-type": "application/json",
@@ -74,7 +74,7 @@ const Register = () => {
   };
 
   // const sendUserDb = (buddyUser) => {
-  //   fetch("http://localhost:5000/users", {
+  //   fetch("https://buddy-server.vercel.app/users", {
   //     method: "POST",
   //     headers: {
   //       "content-type": "application/json",
@@ -111,7 +111,7 @@ const Register = () => {
 
         navigate("/");
 
-        fetch("http://localhost:5000/users", {
+        fetch("https://buddy-server.vercel.app/users", {
           method: "POST",
           headers: {
             "content-type": "application/json",

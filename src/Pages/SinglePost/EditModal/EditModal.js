@@ -19,7 +19,7 @@ const EditModal = ({ singleUser }) => {
         data.university === "" ? singleUser.university : data?.university,
     };
 
-    fetch(`http://localhost:5000/users?email=${singleUser?.email}`, {
+    fetch(`https://buddy-server.vercel.app/users?email=${singleUser?.email}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

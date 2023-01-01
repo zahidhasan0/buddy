@@ -27,7 +27,7 @@ const PostCard = ({ post }) => {
   const handleReact = async () => {
     if (user) {
       console.log(reactCount);
-      fetch(`http://localhost:5000/react/${_id}`, {
+      fetch(`https://buddy-server.vercel.app/react/${_id}`, {
         method: "PUT",
         headers: {
           "content-type": "application/json",

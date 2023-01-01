@@ -47,7 +47,7 @@ const Login = () => {
           university: "",
         };
 
-        fetch("http://localhost:5000/users", {
+        fetch("https://buddy-server.vercel.app/users", {
           method: "POST",
           headers: {
             "content-type": "application/json",

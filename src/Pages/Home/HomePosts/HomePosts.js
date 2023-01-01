@@ -6,7 +6,7 @@ const HomePosts = () => {
   const { data: posts } = useQuery({
     queryKey: ["posts"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/homePosts");
+      const res = await fetch("https://buddy-server.vercel.app/homePosts");
       const data = res.json();
       return data;
     },

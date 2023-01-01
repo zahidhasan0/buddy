@@ -10,7 +10,7 @@ const SinglePost = () => {
   const handleDelete = () => {
     const agree = window.confirm("Are you sure to delete this post?");
     if (agree) {
-      fetch(`http://localhost:5000/posts/${singlePost?._id}`, {
+      fetch(`https://buddy-server.vercel.app/posts/${singlePost?._id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())

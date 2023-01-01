@@ -37,7 +37,7 @@ export const router = createBrowserRouter([
         path: "/posts/:id",
         element: <SinglePost />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/posts/${params.id}`),
+          fetch(`https://buddy-server.vercel.app/posts/${params.id}`),
       },
     ],
   },
