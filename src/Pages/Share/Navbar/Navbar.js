@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { AuthProvider } from "../../../Context/AuthContext";
 
 const Navbar = () => {
-  const { user, logout } = useContext(AuthProvider);
+  const { user, logout, isDark, setIsDark } = useContext(AuthProvider);
 
   const handleSignout = () => {
     logout()
@@ -42,7 +42,13 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar sticky top-0 left-0 right-0 z-20 bg-white text-black">
+    <div
+      className={
+        isDark
+          ? "navbar sticky top-0 left-0 right-0 z-20 bg-gray-700 border-b border-white text-white"
+          : "navbar sticky top-0 left-0 right-0 z-20 bg-white text-black"
+      }
+    >
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -74,6 +80,17 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{menu}</ul>
       </div>
       <div className="navbar-end mr-5 ">
+        <button className="mr-4" onClick={() => setIsDark(!isDark)}>
+          {isDark ? (
+            <span>
+              <FaSun />
+            </span>
+          ) : (
+            <span>
+              <FaMoon />
+            </span>
+          )}
+        </button>
         <button htmlFor="search" type="submit">
           <FaSearch />
         </button>

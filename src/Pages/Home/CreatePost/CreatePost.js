@@ -7,7 +7,7 @@ const CreatePost = () => {
   const { register, handleSubmit, reset } = useForm();
   const [loading, setLoading] = useState(false);
 
-  const { user } = useContext(AuthProvider);
+  const { user, isDark } = useContext(AuthProvider);
   console.log(user);
 
   const date = new Date();
@@ -61,7 +61,7 @@ const CreatePost = () => {
   };
 
   return (
-    <div className="mt-5 bg-white ">
+    <div className={isDark ? "mt-5 bg-gray-700 text-white" : "mt-5 bg-white"}>
       {loading && (
         <div className="flex items-center justify-center" role="status">
           <svg
@@ -86,10 +86,14 @@ const CreatePost = () => {
 
       <div className="shadow-lg mx-3 rounded-sm   p-10  ">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <p className="text-Black">What's on your mind?</p>
+          <p className="text-Black font-semibold">What's on your mind?</p>
 
           <textarea
-            className=" p-2 my-4 border border-teal-600 w-full"
+            className={
+              isDark
+                ? "p-2 my-4 border bg-gray-700 border-white w-full"
+                : "p-2 my-4 border border-teal-600 w-full"
+            }
             name=""
             id=""
             cols=""
